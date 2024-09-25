@@ -8,7 +8,7 @@ interface FarmInterface
 {
     public function addAnimal(AnimalInterface $animal): static;
 
-    public function getCountAnimals(): array;
+    public function getAllAnimals(): array;
 
     public function harvest(): void;
 

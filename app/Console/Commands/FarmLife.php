@@ -28,8 +28,8 @@ class FarmLife extends Command
         // Вывести на экран информацию о количестве каждого типа животных на ферме.
         $this->newLine();
         $this->info("На ферме живут:");
-        foreach ($farm->getCountAnimals() as $name => $count) {
-            $this->info("$name: $count");
+        foreach ($farm->getAllAnimals() as $animal) {
+            $this->info("$animal->name: $animal->count");
         }
 
         // 7 раз (неделю) произвести сбор продукции (подоить коров и собрать яйца у кур).
@@ -41,7 +41,7 @@ class FarmLife extends Command
         $this->newLine();
         $this->info('Собрано продукции:');
         foreach ($farm->getCollectedProducts() as $product) {
-            $this->info("{$product->name}: {$product->count} {$product->unitMeasure}");
+            $this->info("$product->name: $product->count $product->unitMeasure");
         }
         // Добавить на ферму ещё 5 кур и 1 корову (съездили на рынок, купили животных).
         // Снова вывести информацию о количестве каждого типа животных на ферме.
