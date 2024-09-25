@@ -10,7 +10,7 @@ interface FarmInterface
 
     public function getCountAnimals(): array;
 
-    public function getProducts(): array;
+    public function harvest(): void;
 
-    public function getCountProducts(): array;
+    public function getCollectedProducts(): array;
 }

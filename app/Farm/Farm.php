@@ -4,16 +4,19 @@ declare(strict_types=1);
 
 namespace App\Farm;
 
+use App\Farm\Data\ProductData;
 use App\Farm\Interfaces\AnimalInterface;
 use App\Farm\Interfaces\FarmInterface;
 
 /**
  * @property AnimalInterface[] $animals
+ * @property ProductData[] $products
  */
 class Farm implements FarmInterface
 {
     protected array $animals = [];
-    protected array $countProducts = [];
+
+    protected array $products = [];
 
     public function addAnimal(AnimalInterface $animal): static
     {
@@ -22,25 +25,32 @@ class Farm implements FarmInterface
         return $this;
     }
 
-    public function getProducts(): array
+    public function harvest(): void
     {
-        $products = [];
-        foreach ($this->animals as $animal) {
-            $products[] = $animal->getProduct();
-        }
-
-        return $products;
-    }
-
-    public function getCountProducts(): array
-    {
-        $products = [];
         foreach ($this->animals as $animal) {
             $product = $animal->getProduct();
-            $this->countProducts[$product->getName()] = ($this->countProducts[$product->getName()] ?? 0) + 1;
-        }
+            $name = $product->getName();
 
-        return $products;
+
+            if (! isset($this->products[$name])) {
+                $this->products[$name] = new ProductData(
+                    name: $name,
+                    count: $product->getCount(),
+                    unitMeasure: $product->getUnitMeasure(),
+                );
+                return;
+            }
+
+            $this->products[$name]->count += $product->getCount();
+        }
+    }
+
+    /**
+     * @return ProductData[]
+     */
+    public function getCollectedProducts(): array
+    {
+        return $this->products;
     }
 
     public function getCountAnimals(): array
