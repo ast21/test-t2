@@ -15,6 +15,6 @@ class Chicken extends AbstractAnimal implements AnimalInterface
         $this->product = app(Product::class)
             ->setName('Яйцо')
             ->setCountPeriod(0, 1)
-            ->setUnitMeasure('шт');
+            ->setUnitMeasure('шт.');
     }
 }
