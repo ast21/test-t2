@@ -8,6 +8,7 @@ use App\Farm\Data\AnimalData;
 use App\Farm\Data\ProductData;
 use App\Farm\Interfaces\AnimalInterface;
 use App\Farm\Interfaces\FarmInterface;
+use Exception;
 
 /**
  * @property AnimalInterface[] $animals
@@ -21,6 +22,12 @@ class Farm implements FarmInterface
 
     public function addAnimal(AnimalInterface $animal): static
     {
+        foreach ($this->animals as $existingAnimal) {
+            if (($regNumber = $animal->getRegNumber()) === $existingAnimal->getRegNumber()) {
+                throw new Exception("Животное с номером = '$regNumber' уже существует");
+            }
+        }
+
         $this->animals[] = $animal;
 
         return $this;
