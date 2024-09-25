@@ -14,9 +14,9 @@ abstract class AbstractAnimal implements AnimalInterface
     protected string $name;
     protected ProductInterface $product;
 
-    public function setRegNumber(?string $regNumber): static
+    public function setRegNumber(string $regNumber): static
     {
-        $this->regNumber = $regNumber ?? Str::uuid();
+        $this->regNumber = $regNumber;
 
         return $this;
     }

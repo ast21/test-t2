@@ -6,7 +6,7 @@ namespace App\Farm\Interfaces;
 
 interface AnimalInterface
 {
-    public function setRegNumber(?string $regNumber): static;
+    public function setRegNumber(string $regNumber): static;
 
     public function setName(string $name): static;
 
