@@ -18,10 +18,10 @@ composer install
 
 ### Запуск
 
-Запустите команду `artisan`
 ```bash
 php artisan farm:life
 ```
+<img width="661" alt="image" src="https://github.com/user-attachments/assets/9fa08371-a34d-43e7-bbeb-1467f07d423c">
 
 ### Структура проекта
 
