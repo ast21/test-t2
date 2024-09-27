@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Farm;
+namespace App\Farm\Abstracts;
 
 use App\Farm\Interfaces\ProductInterface;
 
-class Product implements ProductInterface
+class AbstractProduct implements ProductInterface
 {
     protected string $name;
     protected int $countFrom;

@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Farm\Chicken;
-use App\Farm\Cow;
+use App\Farm\Animals\Chicken;
+use App\Farm\Animals\Cow;
 use App\Farm\Farm;
 use Illuminate\Console\Command;
 

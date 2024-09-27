@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Farm;
+namespace App\Farm\Animals;
 
 use App\Farm\Abstracts\AbstractAnimal;
 use App\Farm\Interfaces\AnimalInterface;
+use App\Farm\Products\Milk;
 use Illuminate\Support\Str;
 
 class Cow extends AbstractAnimal implements AnimalInterface
@@ -14,9 +15,7 @@ class Cow extends AbstractAnimal implements AnimalInterface
     {
         $this->regNumber = Str::uuid()->toString();
         $this->name = 'Корова';
-        $this->product = app(Product::class)
-            ->setName('Молоко')
-            ->setCountPeriod(8, 12)
-            ->setUnitMeasure('л.');
+        $this->product = app(Milk::class)
+            ->setCountPeriod(8, 12);
     }
 }
