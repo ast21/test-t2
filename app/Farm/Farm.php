@@ -46,7 +46,7 @@ class Farm implements FarmInterface
                     count: $product->getCount(),
                     unitMeasure: $product->getUnitMeasure(),
                 );
-                return;
+                continue;
             }
 
             $this->products[$name]->count += $product->getCount();
