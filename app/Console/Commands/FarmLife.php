@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Farm\Animals\Chicken;
 use App\Farm\Animals\Cow;
+use App\Farm\Animals\Goat;
 use App\Farm\Farm;
 use Illuminate\Console\Command;
 
@@ -37,6 +38,20 @@ class FarmLife extends Command
         $this->comment('На ферму привезли новых животных: 5 кур и 1 корову.');
         $this->addAnimals($farm, Cow::class, 1);
         $this->addAnimals($farm, Chicken::class, 5);
+
+        // Снова вывести информацию о количестве каждого типа животных на ферме.
+        $this->printAnimals($farm);
+
+        // Снова 7 раз (неделю) производим сбор продукции.
+        $this->harvest($farm);
+
+        // И выводим результат на экран.
+        $this->printCollectedProducts($farm);
+
+        // Добавить на ферму 5 коз (съездили на рынок, купили животных).
+        $this->newLine();
+        $this->comment('На ферму привезли новых животных: 5 коз.');
+        $this->addAnimals($farm, Goat::class, 5);
 
         // Снова вывести информацию о количестве каждого типа животных на ферме.
         $this->printAnimals($farm);
