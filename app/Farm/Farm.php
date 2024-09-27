@@ -37,20 +37,24 @@ class Farm implements FarmInterface
     {
         foreach ($this->animals as $animal) {
             $product = $animal->getProduct();
-            $name = $product->getName();
+            $key = $animal->getRegNumber();
 
-
-            if (!isset($this->products[$name])) {
-                $this->products[$name] = new ProductData(
-                    name: $name,
+            if (!isset($this->products[$key])) {
+                $this->products[$key] = new ProductData(
+                    name: $product->getName(),
                     count: $product->getCount(),
                     unitMeasure: $product->getUnitMeasure(),
                 );
                 continue;
             }
 
-            $this->products[$name]->count += $product->getCount();
+            $this->products[$key]->count += $product->getCount();
         }
+    }
+
+    public function getHarvestStatistics(): array
+    {
+        return $this->products;
     }
 
     /**
@@ -58,7 +62,14 @@ class Farm implements FarmInterface
      */
     public function getCollectedProducts(): array
     {
-        return $this->products;
+        return collect($this->products)
+            ->groupBy('name')
+            ->map(fn ($products) => new ProductData(
+                name: $products[0]->name,
+                count: collect($products)->sum('count'),
+                unitMeasure: $products[0]->unitMeasure,
+            ))
+            ->toArray();
     }
 
 

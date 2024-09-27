@@ -48,7 +48,7 @@ class FarmLife extends Command
         // И выводим результат на экран.
         $this->printCollectedProducts($farm);
 
-        // Добавить на ферму 5 коз (съездили на рынок, купили животных).
+        // Привезли на ферму новых животных: 5 коз - одна коза дает молоко 3-5 литров за один надой.
         $this->newLine();
         $this->comment('На ферму привезли новых животных: 5 коз.');
         $this->addAnimals($farm, Goat::class, 5);
@@ -61,6 +61,9 @@ class FarmLife extends Command
 
         // И выводим результат на экран.
         $this->printCollectedProducts($farm);
+
+        // Сделать вывод статистики по животным: id животного и кол-во произведенной продукции за весь период.
+        $this->printHarvestStatistics($farm);
     }
 
     private function harvest(Farm $farm): void
@@ -94,6 +97,15 @@ class FarmLife extends Command
         $this->info('Собрано продукции:');
         foreach ($farm->getCollectedProducts() as $product) {
             $this->info("$product->name: $product->count $product->unitMeasure");
+        }
+    }
+
+    private function printHarvestStatistics(Farm $farm): void
+    {
+        $this->newLine();
+        $this->info('Статистика сбора продукции за весь период:');
+        foreach ($farm->getHarvestStatistics() as $regNumber => $product) {
+            $this->info("Животное с ID: $regNumber произвело за весь период - $product->name $product->count $product->unitMeasure");
         }
     }
 }
